@@ -9,23 +9,14 @@ import User from "../models/User";
 export default function Todo(props) {
   const [user, setUser] = React.useState(props.user);
   const [todos, setTodos] = React.useState(props.todos);
-  // React.useEffect(() => {
-  //   async function run() {
-  //     const token = document.cookie.split("token=")[1];
-  //     const user = jwt.decode(token);
-  //     if (!user) window.location.href = "/";
-  //     setUser(user);
-  //   }
-  //   run();
-  // }, []);
-
   const [name, setName] = React.useState("");
-  function logout(evt) {
+
+  function logout() {
     document.cookie = "token=null";
     window.location.href = "/";
   }
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     await fetch("http://localhost:3000/api/todos", {
       method: "POST",
@@ -34,9 +25,7 @@ export default function Todo(props) {
         id: new Date().getUTCMilliseconds() + Math.round(Math.random()),
       }),
     });
-
-    // setTodos(res);
-  };
+  }
 
   async function deleteTodo(id) {
     await fetch(`http://localhost:3000/api/todos?id=${id}`, {
@@ -47,7 +36,9 @@ export default function Todo(props) {
     );
     setTodos(res);
   }
+
   if (!user) return <></>;
+
   return (
     <div>
       <div onClick={logout}>Logout</div>

@@ -19,7 +19,6 @@ passport.use(
         const { email, name } = profile._json;
         let user = await User.findOne({ googleId: id });
         if (!user) user = await User.findOne({ email });
-        console.log(user);
         if (!user) {
           // add new user
           const newUser = new User({

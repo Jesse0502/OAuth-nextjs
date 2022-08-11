@@ -2,9 +2,7 @@ import passport from "passport";
 import { setCookie } from "cookies-next";
 
 export default async function handler(req, res, next) {
-  console.log(req.url);
   passport.authenticate("github", (err, user, info) => {
-    console.log(info);
     if (err || !user) return res.redirect("http://localhost:3000/?a=auth_fail");
     let d1 = new Date();
     let d2 = new Date(d1);

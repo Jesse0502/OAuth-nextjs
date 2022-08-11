@@ -4,7 +4,6 @@ import { setCookie } from "cookies-next";
 export default async function handler(req, res, next) {
   try {
     passport.authenticate("google", (err, user, info) => {
-      console.log(info);
       if (err || !user)
         return res.redirect("http://localhost:3000/?a=auth_fail");
       let d1 = new Date();

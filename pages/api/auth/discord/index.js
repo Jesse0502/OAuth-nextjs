@@ -18,7 +18,6 @@ passport.use(
         const { id, email, username } = profile;
         let user = await User.findOne({ discordId: id });
         if (!user) user = await User.findOne({ email });
-        console.log(user);
         if (!user) {
           // add new user
           const newUser = new User({
